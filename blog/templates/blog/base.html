@@ -10,8 +10,15 @@
 	</head>
 	<body>
 		<div class="page-header">
-			<a href="{% url 'blog.views.post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-			<h1><u><center>+ Que Un Blog</center></u></h1>
+			{% if user.is_authenticated %}
+			<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+			<small><a href="{% url 'logout' %}" class="top-menu"><span class="glyphicon glyphicon-off"></span></a></small>
+			<p class="top-menu"><font color="black"><font size=4><span class="glyphicon glyphicon-user"></span>{{ user.username }}</font></font></p>
+			{% else %}
+			<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+			{% endif %}
+			<h1><a href="/"><u><center>+ Que Un Blog</center></u></a></h1>
 		</div>
 
 		<div class="content container">
