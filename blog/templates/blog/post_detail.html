@@ -3,6 +3,7 @@
 {% block content %}
 	{% if user.is_authenticated %}
 		<h1>{{ post.title }}</a></h1>
+		<strong>{{ post.author }}</strong>
 		<p>{{ post.text|linebreaksbr }}</p>
 		<div class="date">
 		{% if post.published_date %}
