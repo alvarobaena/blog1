@@ -17,6 +17,7 @@
 			<p class="top-menu"><font color="black"><font size=4><span class="glyphicon glyphicon-user"></span>{{ user.username }}</font></font></p>
 			{% else %}
 			<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+			<a href="{% url 'nuevo_usuario' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
 			{% endif %}
 			<h1><a href="/"><u><center>+ Que Un Blog</center></u></a></h1>
 		</div>

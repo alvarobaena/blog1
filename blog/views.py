@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post, Comment
+from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -83,3 +85,16 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
+
+def nuevo_usuario(request):
+    if request.method=='POST':
+        formulario = UserCreationForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            aux = User.objects.get(username=formulario.cleaned_data['username'])
+            user = UserProfile(user=aux)
+            user.save()
+            return redirect('/')
+    else:
+        formulario = UserCreationForm()
+    return render(request,'blog/nuevousuario.html',{'formulario':formulario})

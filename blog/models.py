@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -34,4 +35,10 @@ class Comment(models.Model):
 
 
 def approved_comments(self):
-    return self.comments.filter(approved_comment=True)
+    	return self.comments.filter(approved_comment=True)
+
+class UserProfile(models.Model):
+   	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+        	return str(self.user.username)
